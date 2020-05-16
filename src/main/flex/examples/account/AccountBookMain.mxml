@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:account="examples.account.*"
+	width="100%" height="100%" 
+	title="Flex家計簿">
+	<account:AccountBookMainModel id="model" />
+
+	<mx:VBox x="0" y="0" width="100%">
+		<mx:Spacer height="10"/>
+		<mx:HBox width="100%" horizontalGap="0" paddingLeft="10" paddingRight="10">
+			<mx:Label id="txyear" textAlign="right" text="${model.txyear}" />
+			<mx:Label text="年" />
+			<mx:Spacer width="10" />
+			<mx:Label id="txmonth" textAlign="right" text="${model.txyear}" />
+			<mx:Label text="月"/>
+			<mx:Spacer width="100%" />
+			<mx:Label text="合計支出額" />
+			<mx:Label id="totalprice" text="${model.totalprice}" />
+		</mx:HBox>
+		<mx:Spacer height="10"/>
+		<mx:TabNavigator width="100%" height="100%">
+			<account:DaliyAccountTab id="daliyAccountTab" />
+		</mx:TabNavigator>
+		
+	</mx:VBox>
+	
+</mx:Panel>

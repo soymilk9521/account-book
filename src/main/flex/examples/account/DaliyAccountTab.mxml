@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:account="examples.account.*"
+	xmlns:formatters="examples.account.formatters.*"
+	width="100%" height="100%"
+	label="日付別" >
+	
+	<account:DaliyAccountTabModel id="model" />
+	<account:DaliyAccountTabController id="controller" />
+		
+	<formatters:DataColumnFormatter id="dateColumnFormatter" />
+	
+	<!--<mx:Component id="DayColoredLabel">
+		<mx:Label>
+			<mx:Script>
+				<![CDATA[
+					override public function set data(value: Object): void {
+						super.data = value;
+						var date: Date = value["txdate"] as Date;
+						if(date) {
+							switch(date.day) {
+								case 0:
+									setStyle("color", 0xFF0000);
+									break;
+								case 6:
+									setStyle("color", 0x0000FF);
+									break;
+								default :
+									setStyle("color", 0x000000);
+									break;
+							}
+						}
+					}
+				]]>
+			</mx:Script>
+		</mx:Label>
+	</mx:Component>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			public function insertButtonClickHandler(event: MouseEvent): void {
+				Alert.show("クリックされた.");
+			}
+		]]>
+	</mx:Script> -->
+	
+	<mx:DataGrid width="100%" height="400" dataProvider="{model.accounts}">
+		<mx:columns>
+			<!--<mx:DataGridColumn headerText="日付" dataField="txdate" 
+				labelFunction="{dateColumnFormatter.format}"
+				itemRenderer="{DayColoredLabel}"/>-->
+			<mx:DataGridColumn headerText="日付" dataField="txdate" 
+				labelFunction="{dateColumnFormatter.format}"
+				itemRenderer="examples.account.components.DayColoredLabel"/>
+			<mx:DataGridColumn headerText="大項目" dataField="firstTitleName"/>
+			<mx:DataGridColumn headerText="中項目" dataField="secondTitleName"/>
+			<mx:DataGridColumn headerText="小項目" dataField="thirdTitleName"/>
+			<mx:DataGridColumn headerText="金額" dataField="price"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:Spacer height="10"/>
+	<mx:HBox width="100%" horizontalAlign="center">
+		<mx:Button id="insertButton" click="controller.insertButtonClickHandler(event);" label="記録を追加"/>
+		<mx:Spacer width="10"/>
+		<mx:Button id="updateButton" label="記録を訂正"/>
+		<mx:Spacer width="10"/>
+		<mx:Button id="deleteButton" label="記録を削除"/>
+	</mx:HBox>
+	
+</mx:VBox>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:account="examples.account.*"
+	width="850" height="650"
+	layout="absolute">
+	<account:AccountBookMain />
+
+</mx:WindowedApplication>
