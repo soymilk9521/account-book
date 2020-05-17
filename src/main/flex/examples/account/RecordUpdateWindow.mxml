@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
+	title="記録を追加" showCloseButton="true" xmlns:account="examples.account.*">
+	
+	<account:RecordUpdateModel id="model" />
+	<account:RecordUpdateWindowController id="controller" />
+	
+	<mx:Array id="validators">
+		<mx:Validator id="txDateValidator" source="{txdateFiled}" 
+			property="selectedDate"
+			requiredFieldError="日付を入力してください。"/>
+		<mx:Validator id="firstTitleCmbValidator" source="{firstTitleCmb}" 
+			property="selectedItem"
+			requiredFieldError="大項目を選択してください。"/>
+		<mx:Validator id="secondTitleCmbValidator" source="{secondTitleCmb}" 
+			property="selectedItem"
+			requiredFieldError="中項目を選択してください。"/>
+		<mx:NumberValidator id="priceTiValidator" source="{priceTi}" 
+			property="text"
+			requiredFieldError="1円以上の金額を入力してください。"
+			lowerThanMinError="1円以上の金額を入力してください。"/>	
+		
+	</mx:Array>
+	
+	<mx:states>
+		<mx:State name="Insert">
+			<mx:SetProperty target="{this}" name="title" value="記録の追加"/>
+			<mx:SetProperty target="{executeButton}" name="label" value="この記録を追加"/>
+		</mx:State>
+		<mx:State name="Update">
+			<mx:SetProperty target="{this}" name="title" value="記録の訂正"/>
+			<mx:SetProperty target="{executeButton}" name="label" value="この記録を訂正"/>
+		</mx:State>
+		<mx:State name="Delete">
+			<mx:SetProperty target="{this}" name="title" value="記録の削除"/>
+			<mx:SetProperty target="{executeButton}" name="label" value="この記録を削除"/>
+			<mx:SetProperty target="{txdateFiled}" name="enabled" value="false"/>
+			<mx:SetProperty target="{firstTitleCmb}" name="enabled" value="false"/>
+			<mx:SetProperty target="{secondTitleCmb}" name="enabled" value="false"/>
+			<mx:SetProperty target="{thirdTitleCmb}" name="enabled" value="false"/>
+			<mx:SetProperty target="{priceTi}" name="enabled" value="false"/>
+		</mx:State>
+	</mx:states>
+	<mx:Form width="100%">
+		<mx:FormHeading label="出費データ記録詳細" />
+		<mx:FormItem label="日付" required="true">
+			<mx:DateField id="txdateFiled" selectedDate="{model.account.txdate}"/>
+		</mx:FormItem>
+		<mx:FormItem label="大項目" required="true">
+			<mx:ComboBox id="firstTitleCmb" labelField="firstTitleName" 
+				prompt="選択してください。" width="200" dataProvider="{model.firstTitleList}"/>
+		</mx:FormItem>
+		<mx:FormItem label="中項目" required="true">
+			<mx:ComboBox id="secondTitleCmb" labelField="secondTitleName" 
+				prompt="選択してください。" width="200" dataProvider="{model.secondTitleList}"/>
+		</mx:FormItem>
+		<mx:FormItem label="小項目">
+			<mx:ComboBox id="thirdTitleCmb" labelField="thirdTitleName" 
+				prompt="{model.account.thirdTitleName}" width="200" 
+				dataProvider="{model.thirdTitleList}"/>
+		</mx:FormItem>
+		<mx:FormItem label="金額" required="true">
+			<mx:TextInput restrict="0-9" maxChars="9" id="priceTi" text="{model.account.price}"/>
+		</mx:FormItem>
+		<mx:ControlBar horizontalAlign="center">
+			<mx:Button label="この記録を追加" id="executeButton" />
+			<mx:Button label="キャンセル" id="cancelButton" />
+		</mx:ControlBar>
+	</mx:Form>
+	
+</mx:TitleWindow>

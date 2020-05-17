@@ -21,6 +21,7 @@
 		<mx:Spacer height="10"/>
 		<mx:TabNavigator width="100%" height="100%">
 			<account:DaliyAccountTab id="daliyAccountTab" />
+			<account:GroupedAccountTab id="groupedAccountTab" />
 		</mx:TabNavigator>
 		
 	</mx:VBox>
